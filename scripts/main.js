@@ -32,7 +32,10 @@
   // Capture a screenshot of the current tab
   function captureImage() {
     removeListeners();
-    chrome.tabs.captureVisibleTab(null, {format: "png"}, insertImage);
+    chrome.tabs.captureVisibleTab(null, {format: "png"}, function(image) {
+      if (!image) return noImageFound("Could not screenshot current page.");
+      insertImage(image)
+    });
   }
 
   // Handle a paste event. This removes the current
@@ -52,7 +55,7 @@
       }
     }
 
-    noImageFound();
+    noImageFound("No image was found in your clipboard.");
   }
 
   // Insert the image into a content script on pasteboard.co
@@ -97,9 +100,9 @@
     errorContainer.textContent = text;
   }
 
-  function noImageFound() {
+  function noImageFound(text) {
     addListeners();
-    displayError("No image was found in your clipboard.");
+    displayError(text);
   }
 
   init();
