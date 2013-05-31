@@ -33,7 +33,7 @@
   function captureImage() {
     removeListeners();
     chrome.tabs.captureVisibleTab(null, {format: "png"}, function(image) {
-      if (!image) return noImageFound("Could not screenshot current page.");
+      if (!image) return noImageFound("Could not screenshot the current page.");
       insertImage(image)
     });
   }
