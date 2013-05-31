@@ -1,11 +1,14 @@
 (function() {
   var SITE_URL = "http://localhost:4000",
       screenshotButton,
-      clipboardButton;
+      clipboardButton,
+      errorContainer;
 
   function init() {
     screenshotButton = document.getElementById("screenshot");
     clipboardButton = document.getElementById("clipboard");
+    errorContainer = document.getElementById("error");
+
     addListeners();
   }
 
@@ -88,8 +91,14 @@
     chrome.tabs.executeScript(tab.id, {file: "scripts/content.js"});
   }
 
+  // Display an error in the error container element
+  function displayError(text) {
+    errorContainer.textContent = text;
+  }
+
   function noImageFound() {
-    alert("No image was found in your clipboard");
+    addListeners();
+    displayError("No image was found in your clipboard.");
   }
 
   init();
