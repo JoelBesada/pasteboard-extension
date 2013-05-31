@@ -1,8 +1,13 @@
 (function() {
   var SITE_URL = "http://localhost:4000",
+      hotkeys = {
+        49: captureImage, // Number 1 key in the top number row
+        50: pasteImage  // Number 2 key in the top number row
+      },
       screenshotButton,
       clipboardButton,
       errorContainer;
+
 
   function init() {
     screenshotButton = document.getElementById("screenshot");
@@ -13,6 +18,7 @@
   }
 
   function addListeners() {
+    document.addEventListener("keypress", handleHotkeys);
     screenshotButton.addEventListener("click", captureImage);
     clipboardButton.addEventListener("click", pasteImage);
   }
@@ -20,10 +26,17 @@
   function removeListeners() {
     screenshotButton.removeEventListener("click", captureImage);
     clipboardButton.removeEventListener("click", pasteImage);
+    document.removeEventListener("keypress", handleHotkeys);
+  }
+
+  function handleHotkeys(e) {
+    handler = hotkeys[e.keyCode];
+    if (handler) handler();
   }
 
   // Add a paste listener and force the event on the document
   function pasteImage() {
+    clipboardButton.className = "active";
     removeListeners();
     document.addEventListener("paste", handlePaste);
     document.execCommand("paste");
@@ -31,6 +44,7 @@
 
   // Capture a screenshot of the current tab
   function captureImage() {
+    screenshotButton.className = "active";
     removeListeners();
     chrome.tabs.captureVisibleTab(null, {format: "png"}, function(image) {
       if (!image) return noImageFound("Could not screenshot the current page.");
@@ -102,6 +116,8 @@
   }
 
   function noImageFound(text) {
+    screenshotButton.className = "";
+    clipboardButton.className = "";
     addListeners();
     displayError(text);
   }
