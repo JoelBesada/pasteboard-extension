@@ -96,6 +96,7 @@
 
   // Display an error in the error container element
   function displayError(text) {
+    document.body.style.height = "auto";
     errorContainer.className = "in";
     errorContainer.textContent = text;
   }
