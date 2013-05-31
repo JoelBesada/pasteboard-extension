@@ -93,6 +93,7 @@
 
   // Display an error in the error container element
   function displayError(text) {
+    errorContainer.className = "in";
     errorContainer.textContent = text;
   }
 

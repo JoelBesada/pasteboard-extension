@@ -1,4 +1,90 @@
+@font-face {
+  font-family: 'Droid Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Droid Sans'), local('DroidSans'), url(../fonts/DroidSans.ttf) format('woff');
+}
+@font-face {
+  font-family: 'Droid Sans';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Droid Sans Bold'), local('DroidSans-Bold'), url(../fonts/DroidSans-Bold.ttf) format('woff');
+}
+
+* { box-sizing: border-box; }
+html {
+  box-shadow: inset 0 0 0 3px white,
+    inset 0 0 1px 4px rgba(0, 0, 25, 0.5),
+    inset 0 0 80px rgba(0, 0, 25, 0.2);
+}
 body {
-  width: 300px;
-  height: 100px;
+  width: 345px;
+  padding: 20px;
+
+  color: #eee;
+  text-shadow: 0 1px 0 black;
+  font-family: 'Droid Sans', sans-serif;
+  text-align: center;
+
+  background-color: #61687E;
+  background-image: url("../images/bg.png");
+}
+
+button {
+  display: inline-block;
+  padding: 0.5em 1em;
+  margin: 5px 8px;
+
+  border-radius: 3px;
+  border: 1px solid black;
+
+  color: #eee;
+  text-shadow: 0 1px 0 black;
+  font-family: 'Droid Sans', sans-serif;
+  font-size: 14px;
+
+  background: #166F16;
+  background-image: linear-gradient(transparent, rgba(0,0,0,.2));
+
+  box-shadow: inset 0 1px 1px rgba(255,255,255,0.15),
+        inset 0 0 5px rgba(255,255,255, 0.05),
+        0 0 5px rgba(0,0,25,0.5),
+        0 5px 10px rgba(0,0,25,0.3);
+
+  -webkit-transition: background-color 0.15s;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #1a841a;
+}
+
+button:active {
+  background: #125a12;
+  box-shadow: 0 1px 1px rgba(255,255,255,0.10),
+        0 0 5px rgba(255,255,255, 0.05),
+        inset 0 0 5px rgba(0,0,0,0.4),
+        inset 0 5px 10px rgba(0,0,0,0.2);
+
+  -webkit-transition: none;
+}
+
+button:focus {
+  outline: none;
+}
+
+#error {
+  display: none;
+  margin: 0;
+  margin-top: 15px;
+}
+
+#error.in {
+  display: block;
+  -webkit-animation: fade-in 0.5s both;
+}
+
+@-webkit-keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
