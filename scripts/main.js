@@ -1,5 +1,5 @@
 (function() {
-  var SITE_URL = "http://localhost:4000",
+  var SITE_URL = "http://pasteboard.co",
       hotkeys = {
         49: captureImage, // Number 1 key in the top number row
         50: pasteImage  // Number 2 key in the top number row
