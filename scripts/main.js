@@ -85,7 +85,7 @@
     chrome.tabs.executeScript(tab.id, {
       code: "window.EXT_IMAGE_DATA = '" + imageData + "';"
     });
-    chrome.tabs.executeScript(tab.id, {file: "content.js"});
+    chrome.tabs.executeScript(tab.id, {file: "scripts/content.js"});
   }
 
   function noImageFound() {
