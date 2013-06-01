@@ -43,7 +43,9 @@ h1 {
   text-decoration: none;
   font-size: 24px;
   font-weight: bold;
+}
 
+.loaded #page-link {
   -webkit-transition-property: color, text-shadow;
   -webkit-transition-duration: 0.15s;
 }
@@ -78,8 +80,11 @@ button {
         0 0 5px rgba(0,0,25,0.5),
         0 5px 10px rgba(0,0,25,0.3);
 
-  -webkit-transition: background-color 0.15s;
   cursor: pointer;
+}
+
+.loaded button {
+  -webkit-transition: background-color 0.15s;
 }
 
 button:hover {

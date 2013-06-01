@@ -10,6 +10,7 @@
       errorContainer;
 
   function init() {
+    document.body.className = "loaded";
     screenshotButton = document.getElementById("screenshot");
     clipboardButton = document.getElementById("clipboard");
     errorContainer = document.getElementById("error");
