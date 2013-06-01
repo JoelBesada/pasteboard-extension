@@ -34,11 +34,27 @@ body {
 }
 
 h1 {
-  margin: 0;
-  margin-bottom: 12px;
+  margin: 0 0 5px 0;
+}
 
-  font-size: 26px;
-  text-shadow: 0 1px 2px rgba(0, 0, 25, 0.8);
+#page-link {
+  color: #070c16;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.2);
+  text-decoration: none;
+  font-size: 24px;
+  font-weight: bold;
+
+  -webkit-transition-property: color, text-shadow;
+  -webkit-transition-duration: 0.15s;
+}
+
+#page-link:hover, #page-link.active {
+  color: #E0E6F3;
+  text-shadow: 0 0 5px rgba(255,255,255,0.7);
+}
+
+#page-link:focus {
+  outline: none;
 }
 
 button {

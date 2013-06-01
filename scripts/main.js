@@ -1,18 +1,19 @@
 (function() {
   var SITE_URL = "http://pasteboard.co",
       hotkeys = {
-        49: captureImage, // Number 1 key in the top number row
-        50: pasteImage  // Number 2 key in the top number row
+        49: clickLink,    // Number 1 key in the top number row
+        50: captureImage, // Number 2 key in the top number row
+        51: pasteImage    // Number 3 key in the top number row
       },
       screenshotButton,
       clipboardButton,
       errorContainer;
 
-
   function init() {
     screenshotButton = document.getElementById("screenshot");
     clipboardButton = document.getElementById("clipboard");
     errorContainer = document.getElementById("error");
+    pageLink = document.getElementById("page-link");
 
     addListeners();
   }
@@ -21,17 +22,26 @@
     document.addEventListener("keypress", handleHotkeys);
     screenshotButton.addEventListener("click", captureImage);
     clipboardButton.addEventListener("click", pasteImage);
+    pageLink.addEventListener("click", clickLink);
   }
 
   function removeListeners() {
+    document.removeEventListener("keypress", handleHotkeys);
     screenshotButton.removeEventListener("click", captureImage);
     clipboardButton.removeEventListener("click", pasteImage);
-    document.removeEventListener("keypress", handleHotkeys);
+    pageLink.removeEventListener("click", clickLink);
   }
 
   function handleHotkeys(e) {
     handler = hotkeys[e.keyCode];
     if (handler) handler();
+  }
+
+  // Handle clicks on the pasteboard.co link
+  function clickLink() {
+    pageLink.className = "active";
+    removeListeners();
+    openTab();
   }
 
   // Add a paste listener and force the event on the document
