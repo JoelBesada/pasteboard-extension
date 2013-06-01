@@ -44,11 +44,12 @@
 
   // Capture a screenshot of the current tab
   function captureImage() {
+    error = "Could not screenshot the current page.";
     screenshotButton.className = "active";
     removeListeners();
     chrome.tabs.captureVisibleTab(null, {format: "png"}, function(image) {
-      if (!image) return noImageFound("Could not screenshot the current page.");
-      insertImage(image)
+      if (!image) return noImageFound(error);
+      insertImage(image, error)
     });
   }
 
@@ -56,25 +57,27 @@
   // event listener since we only want to listen to
   // forced paste events.
   function handlePaste(e) {
-    document.removeEventListener("paste", handlePaste);
+    var items = e.clipboardData.items,
+        error = "No image was found in your clipboard.";
 
-    var items = e.clipboardData.items;
+    document.removeEventListener("paste", handlePaste);
     if (items) {
       for (var i = 0; i < items.length; i++) {
         var item = items[i];
 
         // We're only interested in images
         if(/image/.test(item.type))
-          return insertImage(item.getAsFile());
+          return insertImage(item.getAsFile(), error);
       }
     }
 
-    noImageFound("No image was found in your clipboard.");
+    noImageFound(error);
   }
 
   // Insert the image into a content script on pasteboard.co
-  function insertImage(image) {
+  function insertImage(image, errorMessage) {
     readData(image, function(imageData) {
+      if (!imageData) return noImageFound(errorMessage);
       openTab(function(tab) {
         insertContentScript(tab, imageData);
       });
